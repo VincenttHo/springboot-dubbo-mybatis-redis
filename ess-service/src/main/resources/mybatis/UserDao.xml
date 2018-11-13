@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vincent.dao.UserDao">
+
+	<select id="queryById"  resultType="com.vincent.po.UserPo"  flushCache="false"
+			useCache="false" timeout="10000" fetchSize="256" statementType="PREPARED" resultSetType="FORWARD_ONLY">
+		select
+		<trim  prefix="" suffix=""  suffixOverrides="," >
+			id,
+			mobile,
+			gender,
+			email,
+			status,
+			myDesc,
+			age,
+			isAuth,
+			creator,
+			createtime,
+			modifier,
+			modifytime,
+			birthday,
+			pinyinCode,
+			wubiCode,
+			spellingCode,
+			trueName,
+		</trim>
+		from t_ess_user
+		where id=#{id}
+		and deleted=0
+	</select>
+
+	<update id="update" parameterType="com.vincent.po.UserPo" flushCache="true" statementType="PREPARED" timeout="20">
+		update t_ess_user
+		<set>
+			<if test="mobile!=null">
+			mobile=#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="gender!=null">
+			gender=#{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="email!=null">
+			email=#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="status!=null">
+			status=#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="myDesc!=null">
+			myDesc=#{myDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="age!=null">
+			age=#{age,jdbcType=INTEGER},
+			</if>
+			<if test="isAuth!=null">
+			isAuth=#{isAuth,jdbcType=BIT},
+			</if>
+			<if test="createtime!=null">
+			createtime=#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifier!=null">
+			modifier=#{modifier,jdbcType=VARCHAR},
+			</if>
+			<if test="modifytime!=null">
+			modifytime=#{modifytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="birthday!=null">
+			birthday=#{birthday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pinyinCode!=null">
+			pinyinCode=#{pinyinCode,jdbcType=VARCHAR},
+			</if>
+			<if test="wubiCode!=null">
+			wubiCode=#{wubiCode,jdbcType=VARCHAR},
+			</if>
+			<if test="spellingCode!=null">
+			spellingCode=#{spellingCode,jdbcType=VARCHAR},
+			</if>
+			<if test="trueName!=null">
+			trueName=#{trueName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id=#{id} and deleted=0
+	</update>
+
+</mapper>
